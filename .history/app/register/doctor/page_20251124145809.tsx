@@ -91,31 +91,31 @@ export default function DoctorRegisterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-950 to-black py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="flex justify-center mb-8">
           <Link href="/" className="flex items-center gap-2">
-            <Activity className="h-10 w-10 text-blue-400" />
-            <span className="text-2xl font-bold text-gray-100">DentalHub</span>
+            <Activity className="h-10 w-10 text-blue-600" />
+            <span className="text-2xl font-bold text-gray-900">DentalHub</span>
           </Link>
         </div>
 
-        <div className="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl p-8">
-          <h1 className="text-2xl font-bold text-gray-100 mb-2">Create Doctor Account</h1>
-          <p className="text-gray-400 mb-6">Join DentalHub to streamline your practice</p>
+        <div className="bg-white rounded-2xl shadow-xl p-8">
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">Create Doctor Account</h1>
+          <p className="text-gray-600 mb-6">Join DentalHub to streamline your practice</p>
 
           {error && (
-            <div className="mb-4 p-3 bg-red-900/50 border border-red-800 rounded-lg text-red-300 text-sm">
+            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
               {error}
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <h2 className="text-lg font-semibold text-gray-100 mb-3">Personal Information</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-3">Personal Information</h2>
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="fullName" className="block text-sm font-medium text-gray-300 mb-1">
+                  <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
                     Full Name *
                   </label>
                   <input
@@ -125,14 +125,14 @@ export default function DoctorRegisterPage() {
                     value={formData.fullName}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Dr. John Smith"
                   />
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                       Email *
                     </label>
                     <input
@@ -142,13 +142,13 @@ export default function DoctorRegisterPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2 bg-gray-800 border border-gray-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="doctor@example.com"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
                       Phone
                     </label>
                     <input
@@ -157,14 +157,14 @@ export default function DoctorRegisterPage() {
                       type="tel"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 bg-gray-800 border border-gray-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="(555) 123-4567"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-1">
+                  <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
                     Password *
                   </label>
                   <input
@@ -175,7 +175,7 @@ export default function DoctorRegisterPage() {
                     onChange={handleChange}
                     required
                     minLength={6}
-                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="At least 6 characters"
                   />
                 </div>
@@ -183,10 +183,10 @@ export default function DoctorRegisterPage() {
             </div>
 
             <div>
-              <h2 className="text-lg font-semibold text-gray-100 mb-3">Professional Details</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-3">Professional Details</h2>
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="licenseNumber" className="block text-sm font-medium text-gray-300 mb-1">
+                  <label htmlFor="licenseNumber" className="block text-sm font-medium text-gray-700 mb-1">
                     License Number
                   </label>
                   <input
@@ -195,13 +195,13 @@ export default function DoctorRegisterPage() {
                     type="text"
                     value={formData.licenseNumber}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="DDS-123456"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="specialty" className="block text-sm font-medium text-gray-300 mb-1">
+                  <label htmlFor="specialty" className="block text-sm font-medium text-gray-700 mb-1">
                     Specialty
                   </label>
                   <input
@@ -210,7 +210,7 @@ export default function DoctorRegisterPage() {
                     type="text"
                     value={formData.specialty}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="General Dentistry"
                   />
                 </div>
@@ -218,10 +218,10 @@ export default function DoctorRegisterPage() {
             </div>
 
             <div>
-              <h2 className="text-lg font-semibold text-gray-100 mb-3">Clinic Information</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-3">Clinic Information</h2>
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="clinicName" className="block text-sm font-medium text-gray-300 mb-1">
+                  <label htmlFor="clinicName" className="block text-sm font-medium text-gray-700 mb-1">
                     Clinic Name *
                   </label>
                   <input
@@ -231,13 +231,13 @@ export default function DoctorRegisterPage() {
                     value={formData.clinicName}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Smith Dental Care"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="clinicAddress" className="block text-sm font-medium text-gray-300 mb-1">
+                  <label htmlFor="clinicAddress" className="block text-sm font-medium text-gray-700 mb-1">
                     Clinic Address
                   </label>
                   <input
@@ -246,13 +246,13 @@ export default function DoctorRegisterPage() {
                     type="text"
                     value={formData.clinicAddress}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="123 Main St, City, State 12345"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="clinicPhone" className="block text-sm font-medium text-gray-300 mb-1">
+                  <label htmlFor="clinicPhone" className="block text-sm font-medium text-gray-700 mb-1">
                     Clinic Phone
                   </label>
                   <input
@@ -261,7 +261,7 @@ export default function DoctorRegisterPage() {
                     type="tel"
                     value={formData.clinicPhone}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="(555) 987-6543"
                   />
                 </div>
@@ -271,16 +271,16 @@ export default function DoctorRegisterPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Creating Account...' : 'Create Account'}
             </button>
           </form>
 
           <div className="mt-6 text-center text-sm">
-            <p className="text-gray-400">
+            <p className="text-gray-600">
               Already have an account?{' '}
-              <Link href="/login" className="text-blue-400 hover:text-blue-300 font-medium">
+              <Link href="/login" className="text-blue-600 hover:text-blue-700 font-medium">
                 Sign in
               </Link>
             </p>

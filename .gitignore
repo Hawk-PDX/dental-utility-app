@@ -43,4 +43,13 @@ next-env.d.ts
 # setup and documentation
 SETUP.md
 supabase/README.md
+
+# AI-generated files
 WARP.md
+.cursorrules
+.windsurfrules
+.clinerules
+.aiderignore
+.copilotignore
+*.prompt
+prompts/
