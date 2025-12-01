@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Activity, Calendar, FileText, MessageSquare, UserPlus, LogOut } from 'lucide-react'
+import { Calendar, FileText, MessageSquare, UserPlus } from 'lucide-react'
 import { getMockSession, clearMockSession, MOCK_STATS, MOCK_USERS } from '@/lib/mock-auth'
 
 export default function PatientDashboard() {
@@ -38,29 +38,7 @@ export default function PatientDashboard() {
   const linkedDoctors = MOCK_STATS.patient.linkedDoctors
 
   return (
-    <div className="min-h-screen bg-black">
-      <header className="bg-gray-900 border-b border-gray-800">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Activity className="h-8 w-8 text-blue-400" />
-              <div>
-                <h1 className="text-xl font-bold text-gray-100">DentalHub</h1>
-                <p className="text-sm text-gray-400">Welcome, {profile?.full_name}</p>
-              </div>
-            </div>
-            <button
-              onClick={handleSignOut}
-              className="flex items-center gap-2 px-4 py-2 text-sm text-gray-300 hover:text-red-400 transition-colors"
-            >
-              <LogOut className="h-4 w-4" />
-              Sign Out
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <main className="container mx-auto px-4 py-8">
+    <main className="container mx-auto px-4 py-8">
         <div className="grid md:grid-cols-3 gap-6 mb-8">
           <StatCard
             icon={<Calendar className="h-6 w-6" />}
@@ -134,12 +112,11 @@ export default function PatientDashboard() {
           </div>
         </div>
 
-        <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h2 className="text-xl font-bold text-gray-100 mb-4">Recent Activity</h2>
-          <p className="text-gray-400">No recent activity to display.</p>
-        </div>
-      </main>
-    </div>
+      <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h2 className="text-xl font-bold text-gray-100 mb-4">Recent Activity</h2>
+        <p className="text-gray-400">No recent activity to display.</p>
+      </div>
+    </main>
   )
 }
 

@@ -1,6 +1,7 @@
 export type UserRole = 'doctor' | 'patient'
 export type AppointmentStatus = 'scheduled' | 'completed' | 'cancelled' | 'no_show'
 export type LinkStatus = 'pending' | 'active' | 'inactive'
+export type DocumentCategory = 'policies' | 'protocols' | 'forms' | 'instructions' | 'insurance' | 'other'
 
 export interface Profile {
   id: string
@@ -109,4 +110,19 @@ export interface Message {
   read: boolean
   parent_message_id?: string
   created_at: string
+}
+
+export interface ClinicDocument {
+  id: string
+  clinic_id: string
+  created_by?: string
+  title: string
+  content: string
+  category?: DocumentCategory
+  is_template: boolean
+  is_shared_with_patients: boolean
+  version: number
+  tags?: string[]
+  created_at: string
+  updated_at: string
 }

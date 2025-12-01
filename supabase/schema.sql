@@ -125,6 +125,22 @@ CREATE TABLE messages (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- Clinic documents table
+CREATE TABLE clinic_documents (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  clinic_id UUID REFERENCES clinics(id) ON DELETE CASCADE NOT NULL,
+  created_by UUID REFERENCES doctors(id) ON DELETE SET NULL,
+  title TEXT NOT NULL,
+  content TEXT NOT NULL,
+  category TEXT CHECK (category IN ('policies', 'protocols', 'forms', 'instructions', 'insurance', 'other')),
+  is_template BOOLEAN DEFAULT FALSE,
+  is_shared_with_patients BOOLEAN DEFAULT FALSE,
+  version INTEGER DEFAULT 1,
+  tags TEXT[],
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- Row Level Security Policies
 
 -- Profiles
@@ -290,6 +306,53 @@ CREATE POLICY "Recipients can update message read status"
   ON messages FOR UPDATE
   USING (recipient_id = auth.uid());
 
+-- Clinic documents
+ALTER TABLE clinic_documents ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Doctors can view their clinic documents"
+  ON clinic_documents FOR SELECT
+  USING (
+    clinic_id IN (
+      SELECT clinic_id FROM doctors WHERE id = auth.uid()
+    )
+  );
+
+CREATE POLICY "Doctors can create documents for their clinic"
+  ON clinic_documents FOR INSERT
+  WITH CHECK (
+    clinic_id IN (
+      SELECT clinic_id FROM doctors WHERE id = auth.uid()
+    )
+  );
+
+CREATE POLICY "Doctors can update their clinic documents"
+  ON clinic_documents FOR UPDATE
+  USING (
+    clinic_id IN (
+      SELECT clinic_id FROM doctors WHERE id = auth.uid()
+    )
+  );
+
+CREATE POLICY "Doctors can delete their clinic documents"
+  ON clinic_documents FOR DELETE
+  USING (
+    clinic_id IN (
+      SELECT clinic_id FROM doctors WHERE id = auth.uid()
+    )
+  );
+
+CREATE POLICY "Patients can view shared documents from their doctors' clinics"
+  ON clinic_documents FOR SELECT
+  USING (
+    is_shared_with_patients = true AND
+    clinic_id IN (
+      SELECT DISTINCT d.clinic_id 
+      FROM doctors d
+      JOIN doctor_patient_links dpl ON d.id = dpl.doctor_id
+      WHERE dpl.patient_id = auth.uid() AND dpl.status = 'active'
+    )
+  );
+
 -- Indexes for better performance
 CREATE INDEX idx_appointments_doctor ON appointments(doctor_id);
 CREATE INDEX idx_appointments_patient ON appointments(patient_id);
@@ -298,6 +361,9 @@ CREATE INDEX idx_messages_recipient ON messages(recipient_id);
 CREATE INDEX idx_messages_sender ON messages(sender_id);
 CREATE INDEX idx_doctor_patient_links_doctor ON doctor_patient_links(doctor_id);
 CREATE INDEX idx_doctor_patient_links_patient ON doctor_patient_links(patient_id);
+CREATE INDEX idx_clinic_documents_clinic ON clinic_documents(clinic_id);
+CREATE INDEX idx_clinic_documents_category ON clinic_documents(category);
+CREATE INDEX idx_clinic_documents_tags ON clinic_documents USING GIN(tags);
 
 -- Functions
 CREATE OR REPLACE FUNCTION update_updated_at()
@@ -321,5 +387,10 @@ CREATE TRIGGER update_clinics_updated_at
 
 CREATE TRIGGER update_appointments_updated_at
   BEFORE UPDATE ON appointments
+  FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER update_clinic_documents_updated_at
+  BEFORE UPDATE ON clinic_documents
   FOR EACH ROW
   EXECUTE FUNCTION update_updated_at();

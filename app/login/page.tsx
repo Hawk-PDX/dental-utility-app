@@ -15,12 +15,14 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
+    console.log('handleLogin called', { email, password })
     setLoading(true)
     setError('')
 
     try {
       // Mock authentication
       const user = getMockUser(email, password)
+      console.log('User found:', user)
       
       if (!user) {
         throw new Error('Invalid email or password')
@@ -29,8 +31,9 @@ export default function LoginPage() {
       setMockSession(user)
 
       const dashboardPath = user.profile.role === 'doctor' ? '/dashboard/doctor' : '/dashboard/patient'
-      router.push(dashboardPath)
-      router.refresh()
+      console.log('Redirecting to:', dashboardPath)
+      // Use window.location for hard redirect to ensure localStorage is set
+      window.location.href = dashboardPath
     } catch (err: any) {
       setError(err.message || 'Invalid email or password')
     } finally {

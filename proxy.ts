@@ -1,7 +1,10 @@
-import { createServerClient } from '@supabase/ssr'
+repimport { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
+  // TEMP: Skip middleware for mock auth testing
+  return NextResponse.next()
+
   let supabaseResponse = NextResponse.next({
     request,
   })
@@ -43,7 +46,7 @@ export async function middleware(request: NextRequest) {
     const { data: profile } = await supabase
       .from('profiles')
       .select('role')
-      .eq('id', user.id)
+      .eq('id', user!.id)
       .single()
 
     const dashboardPath = profile?.role === 'doctor' ? '/dashboard/doctor' : '/dashboard/patient'

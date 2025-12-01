@@ -156,7 +156,7 @@ export default function Home() {
             </div>
           </div>
           <div className="max-w-6xl mx-auto mt-8 pt-8 border-t border-gray-800 text-sm text-center">
-            <p>© 2024 DentalHub. All rights reserved.</p>
+            <p>© 2025 DentalHub by Rose City Dev. All rights reserved.</p>
           </div>
         </div>
       </footer>
