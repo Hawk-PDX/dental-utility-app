@@ -41,9 +41,10 @@ export async function DashboardHeader({
       .eq('id', user.id)
       .single()
     
-    if (doctor?.clinics?.logo_url) {
-      logoUrl = doctor.clinics.logo_url
-      practiceName = doctor.clinics.name || practiceName
+    const clinic = doctor?.clinics as unknown as { name: string; logo_url: string } | null
+    if (clinic?.logo_url) {
+      logoUrl = clinic.logo_url
+      practiceName = clinic.name || practiceName
     }
   } else if (profile?.role === 'patient') {
     // Get patient's primary doctor's clinic logo
@@ -64,9 +65,10 @@ export async function DashboardHeader({
       .limit(1)
       .single()
     
-    if (link?.doctors?.clinics?.logo_url) {
-      logoUrl = link.doctors.clinics.logo_url
-      practiceName = link.doctors.clinics.name || practiceName
+    const doctors = link?.doctors as unknown as { clinics: { name: string; logo_url: string } } | null
+    if (doctors?.clinics?.logo_url) {
+      logoUrl = doctors.clinics.logo_url
+      practiceName = doctors.clinics.name || practiceName
     }
   }
 
